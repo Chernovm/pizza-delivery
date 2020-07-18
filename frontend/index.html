@@ -17,23 +17,32 @@
 
     <div uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; top: 0">
 
-        <nav class="uk-navbar-container">
-            <div class="uk-container uk-container-expand uk-background-primary uk-light">
-                <div class="uk-align-right uk-align-left@m uk-margin-remove-left" uk-navbar>
-                    <ul class="uk-navbar-nav">
-                        <li class="uk-hidden-touch">
+        <nav class="uk-background-primary" uk-navbar>
+                <div class="uk-navbar-left uk-background-primary uk-light">
+                    <ul class="uk-navbar-nav uk-margin-small-left">
+                        <li class="uk-visible@m">
                             <a href="#pizza-heading" uk-scroll="offset: 150;">Pizza</a>
                         </li>
-                        <li class="uk-hidden-touch">
+                        <li class="uk-visible@m">
                             <a href="#beverages-heading" uk-scroll>Beverages</a>
                         </li>
-                        <li class="uk-hidden-notouch">
+                    </ul>
+                </div>
+                <div class="uk-navbar-right uk-background-primary uk-light">
+
+                    <ul class="uk-navbar-nav uk-margin-small-right">
+                        <li>
+                            <a href="#" uk-icon="icon: cart">
+                                <span class="uk-badge">1</span>
+                            </a>
+                        </li>
+
+                        <li class="uk-hidden@m">
                             <a class="uk-navbar-toggle" uk-navbar-toggle-icon uk-toggle href="#offcanvas-sidebar" ></a>
                         </li>
                     </ul>
 
                 </div>
-            </div>
         </nav>
     </div>
 
@@ -196,6 +205,8 @@
         </div>
     </div>
 </div>
+
+<div class="uk-container uk-container-expand footer">&nbsp;</div>
 
 <div id="offcanvas-sidebar" uk-offcanvas="flip: true">
     <div class="uk-offcanvas-bar">
