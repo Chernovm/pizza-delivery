@@ -1,5 +1,7 @@
 // 1. Your custom variables and variable overwrites.
 $global-link-color: #DA7D02;
+$global-primary-background: #009738;
+$inverse-global-muted-color: rgba(255, 255, 255, 0.85);
 
 // 2. Import default variables and available mixins.
 @import "../../node_modules/uikit/src/scss/variables-theme";
