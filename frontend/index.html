@@ -13,13 +13,35 @@
 </head>
 <body>
 
-<div class="uk-card uk-card-body uk-card-primary">
-    <h3 class="uk-card-title">Chernov Pizza Delivery</h3>
+<div class="uk-section-primary uk-preserve-color">
+
+    <div uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; top: 0">
+
+        <nav class="uk-navbar-container">
+            <div class="uk-container uk-container-expand uk-background-primary uk-light">
+                <div class="uk-align-right uk-align-left@m uk-margin-remove-left" uk-navbar>
+                    <ul class="uk-navbar-nav">
+                        <li class="uk-hidden-touch">
+                            <a href="#pizza-heading" uk-scroll="offset: 150;">Pizza</a>
+                        </li>
+                        <li class="uk-hidden-touch">
+                            <a href="#beverages-heading" uk-scroll>Beverages</a>
+                        </li>
+                        <li class="uk-hidden-notouch">
+                            <a class="uk-navbar-toggle" uk-navbar-toggle-icon uk-toggle href="#offcanvas-sidebar" ></a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+
 </div>
 
 <div class="uk-container uk-margin-medium">
 
-    <h1 class="uk-heading-small uk-text-center">Pizza</h1>
+    <h1 id="pizza-heading" class="uk-heading-small uk-text-center">Pizza</h1>
 
     <div class="uk-child-width-1-2@s uk-child-width-1-4@m uk-grid-large uk-flex-center uk-margin-medium-top" uk-grid  uk-height-match="target: > div > .uk-card">
         <div>
@@ -147,7 +169,7 @@
 
     <hr class="uk-divider-icon uk-margin-large-top">
 
-    <h1 class="uk-heading-small uk-text-center">Beverages</h1>
+    <h1 id="beverages-heading" class="uk-heading-small uk-text-center">Beverages</h1>
 
     <div class="uk-child-width-1-2@s uk-child-width-1-4@m uk-grid-large uk-flex-center uk-margin-large-top" uk-grid  uk-height-match="target: > div > .uk-card">
         <div>
@@ -174,6 +196,30 @@
         </div>
     </div>
 </div>
+
+<div id="offcanvas-sidebar" uk-offcanvas="flip: true">
+    <div class="uk-offcanvas-bar">
+
+        <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+        <h3 class="uk-heading-medium">Menu</h3>
+
+        <ul class="uk-nav uk-nav-default">
+            <li class="uk-margin-large-top">
+                <a href="#pizza-heading" uk-scroll="offset: 150;">
+                    <h2 class="uk-h3 uk-heading-bullet">Pizza</h2>
+                </a>
+            </li>
+            <li class="uk-margin-large-medium">
+                <a href="#beverages-heading" uk-scroll="offset: 150;">
+                    <h2 class="uk-h3 uk-heading-bullet">Beverages</h2>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
 
 <script src="dist/bundle.js"></script>
 </body>
