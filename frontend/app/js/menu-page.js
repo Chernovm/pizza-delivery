@@ -5,7 +5,7 @@ import BeverageCard from "./beverage-card";
 
 export default class MenuPage {
     static loadPizzas() {
-        axios.get('/pizzas')
+        axios.get('/products?type=pizza')
             .then(function (response) {
                 let pizzaContainer = document.getElementById('pizza-list');
                 pizzaContainer.innerHTML = '';
@@ -18,7 +18,7 @@ export default class MenuPage {
     }
 
     static loadBeverages() {
-        axios.get('/beverages')
+        axios.get('/products?type=beverage')
             .then(function (response) {
                 let beverageContainer = document.getElementById('beverage-list');
                 beverageContainer.innerHTML = '';
