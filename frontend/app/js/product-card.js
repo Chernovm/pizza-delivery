@@ -1,3 +1,5 @@
+import CartStorage from "./cart-storage";
+
 export default class PizzaCard {
     constructor(productData) {
         this.data = productData;
@@ -35,8 +37,7 @@ export default class PizzaCard {
         let ukCardTop = document.createElement("div");
         ukCardTop.classList.add("uk-card-media-top");
         let picture = document.createElement("img");
-        let srcAttr = document.createAttribute ("src");
-        srcAttr.value = `assets/images/${this.data.image}`;
+        let srcAttr = this.createAttribute("src", `assets/images/${this.data.image}`);
         picture.attributes.setNamedItem(srcAttr);
         ukCardTop.appendChild(picture);
 
@@ -79,12 +80,7 @@ export default class PizzaCard {
 
         let div = document.createElement("div");
 
-        let button = document.createElement("button");
-        button.classList.add("uk-button", "uk-button-primary", "uk-padding-small", "uk-padding-remove-vertical");
-
-        let buttonText = document.createElement("small");
-        buttonText.innerText = "Choose";
-        button.appendChild(buttonText);
+        let button = this.createActionButton();
 
         div.appendChild(button);
 
@@ -93,6 +89,41 @@ export default class PizzaCard {
         footer.appendChild(ukFlex);
 
         return footer;
+    }
+
+    createActionButton() {
+        let button = document.createElement("button");
+        button.classList.add("uk-button", "uk-button-primary", "uk-padding-small", "uk-padding-remove-vertical", "to-cart-button");
+
+        let buttonText = document.createElement("small");
+        buttonText.innerText = "To Cart";
+        button.appendChild(buttonText);
+
+        let productId = this.createAttribute("product-id", this.data.id);
+        button.attributes.setNamedItem(productId);
+
+        this.bindListener(button);
+
+        return button;
+    }
+
+    bindListener(element) {
+        element.addEventListener('click', (ev) => {
+            let context = ev.currentTarget;
+            let productId = context.attributes.getNamedItem('product-id').value;
+
+            let storage = new CartStorage();
+            storage.addToCart(productId);
+
+            console.log(productId);
+        }, false);
+    }
+
+    createAttribute(name, value) {
+        let attr = document.createAttribute(name);
+        attr.value = value;
+
+        return attr;
     }
 
     getHtml() {

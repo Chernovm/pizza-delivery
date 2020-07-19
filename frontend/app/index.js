@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import PizzaCard from './js/pizza-card'
 import BeverageCard from "./js/beverage-card";
+import CartStorage from "./js/cart-storage";
 import errorHandler from "./error-handler";
 
 import './scss/site.scss'
@@ -14,8 +15,16 @@ UIkit.use(Icons);
 axios.defaults.baseURL = 'http://localhost:8050/api';
 axios.defaults.headers.post['Accept'] = 'application/json, */*; q=0.01';
 
+let cartStorage = new CartStorage();
+
 loadPizzas();
 loadBeverages();
+
+cartStorage.configureStorage();
+cartStorage.countProductsInCart().then((count) => {
+    document.getElementById('cart-counter').innerText = count;
+});
+
 
 function loadPizzas() {
     axios.get('/pizzas')
