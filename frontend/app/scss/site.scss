@@ -1,0 +1,29 @@
+// 1. Your custom variables and variable overwrites.
+$global-link-color: #DA7D02;
+$global-primary-background: #009738;
+$inverse-global-muted-color: rgba(255, 255, 255, 0.85);
+$footer-background-color: #ce2b37;
+
+// 2. Import default variables and available mixins.
+@import "../../node_modules/uikit/src/scss/variables-theme";
+@import "../../node_modules/uikit/src/scss/mixins-theme";
+
+// 3. Your custom mixin overwrites.
+@mixin hook-card() { color: #000; }
+
+// 4. Import UIkit.
+@import "../../node_modules/uikit/src/scss/uikit-theme";
+
+.uk-container.footer {
+  background-color: $footer-background-color;
+}
+
+.uk-flex.dish-footer {
+  align-items: center;
+}
+
+.fixed-right-bottom {
+  position: fixed;
+  bottom:4%;
+  right:2%;
+}

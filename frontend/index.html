@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Chernov Pizza Delivery</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <link rel='stylesheet' href='dist/style.css'>
+</head>
+<body>
+
+<div class="uk-section-primary uk-preserve-color">
+
+    <div uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; top: 0">
+
+        <nav class="uk-background-primary" uk-navbar>
+            <div class="uk-navbar-left uk-background-primary uk-light">
+                <ul class="uk-navbar-nav uk-margin-small-left">
+                    <li class="uk-visible@m">
+                        <a href="/#pizza-heading" uk-scroll="offset: 150;">Pizza</a>
+                    </li>
+                    <li class="uk-visible@m">
+                        <a href="/#beverages-heading" uk-scroll="offset: 150;">Beverages</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="uk-navbar-right uk-background-primary uk-light">
+
+                <ul class="uk-navbar-nav uk-margin-small-right">
+                    <li>
+                        <a href="/orders.html" uk-icon="icon: tag" title="Orders">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/cart.html" uk-icon="icon: cart" title="Cart">
+                            <span id="cart-counter" class="uk-badge">0</span>
+                        </a>
+                    </li>
+
+                    <li class="uk-hidden@m">
+                        <a class="uk-navbar-toggle" uk-navbar-toggle-icon uk-toggle href="#offcanvas-sidebar" ></a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </div>
+
+</div>
+
+<div class="uk-container uk-margin-medium uk-padding-large" uk-height-viewport="expand: true">
+
+    <h1 id="pizza-heading" class="uk-heading-small uk-text-center">Pizza</h1>
+
+    <div id="pizza-list" class="uk-child-width-1-2@s uk-child-width-1-3@m uk-grid-large uk-flex-center uk-margin-medium-top" uk-grid  uk-height-match="target: > div > .uk-card > .uk-card-body">
+        <div class="uk-flex uk-flex-center">
+            <div uk-spinner="ratio: 3"></div>
+        </div>
+    </div>
+
+    <hr class="uk-divider-icon uk-margin-large-top">
+
+    <h1 id="beverages-heading" class="uk-heading-small uk-text-center">Beverages</h1>
+
+    <div id="beverage-list" class="uk-child-width-1-2@s uk-child-width-1-3@m uk-grid-large uk-flex-center uk-margin-large-top" uk-grid  uk-height-match="target: > div > .uk-card > .uk-card-body">
+        <div class="uk-flex uk-flex-center">
+            <div uk-spinner="ratio: 3"></div>
+        </div>
+    </div>
+</div>
+
+<div class="uk-container uk-container-expand footer">&nbsp;</div>
+
+<div id="offcanvas-sidebar" uk-offcanvas="flip: true">
+    <div class="uk-offcanvas-bar">
+
+        <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+        <h3 class="uk-heading-medium">Menu</h3>
+
+        <ul class="uk-nav uk-nav-default">
+            <li class="uk-margin-large-top">
+                <a href="#pizza-heading" uk-scroll="offset: 150;">
+                    <h2 class="uk-h3 uk-heading-bullet">Pizza</h2>
+                </a>
+            </li>
+            <li class="uk-margin-large-medium">
+                <a href="#beverages-heading" uk-scroll="offset: 150;">
+                    <h2 class="uk-h3 uk-heading-bullet">Beverages</h2>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+<a href="#" class="fixed-right-bottom" title="To top" uk-totop></a>
+
+
+<script src="dist/bundle.js"></script>
+</body>
+</html>
+
