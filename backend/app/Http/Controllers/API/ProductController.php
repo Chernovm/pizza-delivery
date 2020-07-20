@@ -17,7 +17,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $productType = $request->get('type') ?? null;
-        $productsQuery = Product::with('product_type')->orderBy('title');
+        $productsQuery = Product::with('productType')->orderBy('title');
 
         if ($productType !== null) {
             $productsQuery->where('product_type_id', function($q) use ($productType)
@@ -45,7 +45,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
