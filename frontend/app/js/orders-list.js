@@ -6,20 +6,16 @@ export default class OrderItem {
     }
 
     createMarkup() {
-    //    <dl class="uk-description-list uk-description-list-divider">
-        //     <dt></dt>
-        //     <dd></dd>
-        // </dl>
-
         let cardDiv = document.createElement("div");
         cardDiv.classList.add("uk-description-list", "uk-description-list-divider");
 
         for (let orderId in this.data) {
             let order = this.data[orderId];
             let date = new Date(order.created_at)
+            console.log(order);
 
             let dt = document.createElement("dt");
-            dt.innerHTML = `${order.client_name} (${order.address}) Phone: ${order.phone} // ${date.toString()}`;
+            dt.innerHTML = `${order.client_name} (${order.address}) Phone: ${order.phone} // ${date.toUTCString()}`;
             cardDiv.appendChild(dt);
 
             let dd = document.createElement("dd");
