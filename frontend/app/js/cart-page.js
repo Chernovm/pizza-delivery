@@ -17,7 +17,7 @@ export default class CartPage {
             console.log(productsArr);
 
             if (!!!productsArr.length) {
-                document.getElementById('loading-spinner').remove();
+                document.getElementById('loading-spinner').classList.add('uk-hidden');
                 document.getElementById('empty-message').classList.remove('uk-hidden');
             }
 
