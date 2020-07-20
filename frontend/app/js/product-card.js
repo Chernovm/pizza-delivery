@@ -75,7 +75,7 @@ export default class PizzaCard {
 
         let price = document.createElement("div");
         price.classList.add("uk-text-middle");
-        price.innerText = `$${this.data.price_usd}`;
+        price.innerText = `$${this.data.price_usd} (€${this.data.price_eur})`;
         ukFlex.appendChild(price);
 
         let div = document.createElement("div");
