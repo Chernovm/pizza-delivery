@@ -42,8 +42,8 @@ class Order extends Model
             $order->client_name = $name;
             $order->phone = $phone;
 
-            $order->sum_usd = $sumUsd;
-            $order->sum_eur = $sumEur;
+            $order->sum_usd = $sumUsd + $delivery['usd'];
+            $order->sum_eur = $sumEur + $delivery['eur'];
 
             $order->delivery_price_usd = $delivery['usd'];
             $order->delivery_price_eur = $delivery['eur'];
