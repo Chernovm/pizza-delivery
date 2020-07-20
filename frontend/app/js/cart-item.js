@@ -87,6 +87,8 @@ export default class CartItem {
 
         let ukFlex = document.createElement("div");
         ukFlex.classList.add("uk-flex", "uk-flex-between", "dish-footer");
+        let gridAttr = this.createAttribute("uk-grid", "");
+        ukFlex.attributes.setNamedItem(gridAttr);
 
         let quantityControl = document.createElement("div");
 
@@ -94,7 +96,7 @@ export default class CartItem {
         quantityControl.appendChild(minus);
 
         let quantity = document.createElement("span");
-        quantity.innerText = this.product.count ? this.product.count : 0;
+        quantity.innerText = (this.product.count ? this.product.count : 0) + " pcs.";
         quantityControl.appendChild(quantity);
 
         let plus = this.createPlusBtn();
@@ -135,7 +137,7 @@ export default class CartItem {
 
     createMinusBtn() {
         let minus = document.createElement("button");
-        minus.classList.add("uk-icon-button", "uk-margin-small-right");
+        minus.classList.add("uk-icon-button", "uk-margin-small-right", "uk-hidden");
         let minusAttr = this.createAttribute("uk-icon", "minus");
         minus.attributes.setNamedItem(minusAttr);
 
@@ -149,7 +151,7 @@ export default class CartItem {
 
     createPlusBtn() {
         let plus = document.createElement("button");
-        plus.classList.add("uk-icon-button", "uk-margin-small-left");
+        plus.classList.add("uk-icon-button", "uk-margin-small-left", "uk-hidden");
         let plusAttr = this.createAttribute("uk-icon", "plus");
         plus.attributes.setNamedItem(plusAttr);
 

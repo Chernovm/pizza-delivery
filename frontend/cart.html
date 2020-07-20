@@ -56,7 +56,7 @@
 
     <h1 id="cart-heading" class="uk-heading-small uk-text-center">Cart</h1>
 
-    <div id="products-list" class="uk-flex-center uk-margin-large-top">
+    <div id="products-list" class="uk-flex-center uk-margin-large-top uk-animation-slide-top">
         <div id="empty-message" class="uk-flex uk-flex-center uk-animation-fade uk-hidden">
             <h4>Your Cart is empty</h4>
         </div>
@@ -65,6 +65,53 @@
         </div>
 
     </div>
+
+    <div id="delivery-container" class="uk-flex uk-flex-between uk-hidden" uk-margin uk-grid>
+        <div>
+            <h5>Delivery cost</h5>
+        </div>
+        <div id="delivery-cost" class="uk-text-middle uk-margin-large-right uk-h5">
+            $<span class="usd">4.00</span>
+            (€<span class="eur">3.00</span>)
+        </div>
+    </div>
+    <div id="total-container" class="uk-hidden uk-margin-small-top">
+        <div class="uk-flex uk-flex-between uk-flex-middle" uk-margin uk-grid>
+            <div>
+                <h4>Total</h4>
+            </div>
+            <div class="uk-text-middle uk-margin-large-right">
+                <div id="order-sum" class="uk-text-middle uk-h4">
+                    $<span class="usd">4.00</span>
+                    (€<span class="eur">3.00</span>)
+                </div>
+            </div>
+        </div>
+        <div class="uk-margin-small-top uk-flex uk-flex-right">
+            <button id="checkout-button" class="uk-button uk-button-primary uk-button-large uk-margin-large-right">Go to Checkout</button>
+        </div>
+    </div>
+
+    <form id="purchase-details" class="uk-hidden uk-animation-slide-bottom">
+        <fieldset class="uk-fieldset">
+            <div class="uk-margin">
+                <label class="uk-form-label" for="fullname-input">Name</label>
+                <input id="fullname-input" class="uk-input" type="text" placeholder="Your Name" name="full_name" autocomplete="off">
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="address-input">Address</label>
+                <textarea id="address-input" class="uk-textarea" rows="5" placeholder="Address" name="address" autocomplete="off"></textarea>
+            </div>
+
+            <div class="uk-margin">
+                <label class="uk-form-label" for="phone-input">Phone</label>
+                <input id="phone-input" class="uk-input" type="text" placeholder="Phone number" name="phone" autocomplete="off">
+            </div>
+
+            <button id="make-order" class="uk-button uk-button-primary">Buy now</button>
+        </fieldset>
+    </form>
 
 </div>
 
