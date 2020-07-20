@@ -40,23 +40,15 @@ export default class CartPage {
                 })
                 .then(function (response) {
                     console.log(response.data);
-                    let item = new CartItem(product, response.data);
+                    let item = new CartItem(context, product, response.data);
 
-                    if (!!context.productsContainer && !!document.getElementById("loading-spinner"))
-                        context.productsContainer.innerHTML = '';
+                    if (!!context.productsContainer && !!document.getElementById("loading-spinner")) {
+                        document.getElementById("loading-spinner").classList.add('uk-hidden');
+                    }
 
                     context.productsContainer.appendChild(item.getHtml());
                     console.log(response.data);
-                    let totalContainer = document.getElementById("total-container");
-                    let deliveryContainer = document.getElementById("delivery-container");
-
-                    let usdSum = document.querySelector("#order-sum > .usd");
-                    usdSum.innerText = (+usdSum.innerText + +response.data.price_usd).toFixed(2);
-                    let eurSum = document.querySelector("#order-sum > .eur");
-                    eurSum.innerText = (+eurSum.innerText + +response.data.price_eur).toFixed(2);
-
-                    deliveryContainer.classList.remove('uk-hidden');
-                    totalContainer.classList.remove('uk-hidden');
+                    context.updateTotal();
                 })
                 .catch(errorHandler);
             }
@@ -65,6 +57,36 @@ export default class CartPage {
         } catch (err) {
             // This code runs if there were any errors.
             console.log(err);
+        }
+    }
+
+    updateTotal() {
+        let totalContainer = document.getElementById("total-container");
+        let deliveryContainer = document.getElementById("delivery-container");
+
+        let deliveryCostUsd = +document.querySelector("#delivery-cost > .usd").innerText;
+        let deliveryCostEur = +document.querySelector("#delivery-cost > .eur").innerText;
+
+        let usdSumContainer = document.querySelector("#order-sum > .usd");
+        let eurSumContainer = document.querySelector("#order-sum > .eur");
+
+        let usdPrices = Array.from(document.querySelectorAll(".usd.product-price")).map((el) => el.innerText);
+        let usdSum = !!usdPrices.length ? +usdPrices.reduce((acc, cur) => +acc + +cur) : 0;
+
+        let eurPrices = Array.from(document.querySelectorAll(".eur.product-price")).map((el) => el.innerText);
+        let eurSum = !!eurPrices.length ? +eurPrices.reduce((acc, cur) => +acc + +cur) : 0;
+        console.log('sums calculated', usdSum, eurSum);
+
+        usdSumContainer.innerText = (usdSum + deliveryCostUsd).toFixed(2);
+        eurSumContainer.innerText = (eurSum + deliveryCostEur).toFixed(2);
+
+        if (usdSum > 0) {
+            deliveryContainer.classList.remove('uk-hidden');
+            totalContainer.classList.remove('uk-hidden');
+        } else {
+            deliveryContainer.classList.add('uk-hidden');
+            totalContainer.classList.add('uk-hidden');
+            document.getElementById('empty-message').classList.remove('uk-hidden');
         }
     }
 

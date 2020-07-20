@@ -1,7 +1,8 @@
 import CartStorage from "./cart-storage";
 
 export default class CartItem {
-    constructor(product, productData) {
+    constructor(context, product, productData) {
+        this.cartPage = context;
         this.product = product;
         this.data = productData;
         this.html = '';
@@ -105,7 +106,20 @@ export default class CartItem {
         let priceContainer = document.createElement("div");
         let price = document.createElement("span");
         price.classList.add("uk-text-middle", "uk-margin-small-right");
-        price.innerText = `$${this.data.price_usd} (€${this.data.price_eur})`;
+
+        let usdSpan = document.createElement("span");
+        usdSpan.classList.add("usd", "product-price");
+        usdSpan.innerText = this.data.price_usd;
+        price.append("$");
+        price.appendChild(usdSpan);
+
+        let eurSpan = document.createElement("span");
+        eurSpan.classList.add("eur", "product-price");
+        eurSpan.innerText = this.data.price_eur;
+        price.append(" (€");
+        price.appendChild(eurSpan);
+        price.append(")");
+
         priceContainer.appendChild(price);
 
         let trashBtn = this.createTrashButton();
@@ -186,6 +200,8 @@ export default class CartItem {
         }
 
         this.html.remove();
+
+        this.cartPage.updateTotal();
     }
 
     getHtml() {
