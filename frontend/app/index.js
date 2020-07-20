@@ -15,18 +15,18 @@ axios.defaults.baseURL = 'http://localhost:8050/api';
 axios.defaults.headers.post['Accept'] = 'application/json, */*; q=0.01';
 
 let cartStorage = new CartStorage();
-let cartPage = new CartPage();
 
 cartStorage.configureStorage();
 cartStorage.countProductsInCart().then((count) => {
     document.getElementById('cart-counter').innerText = count;
 });
 
-if (window.location.pathname === '/') {
-    MenuPage.loadPizzas();
-    MenuPage.loadBeverages();
-} else if (window.location.pathname === '/cart.html') {
+if (window.location.pathname === '/cart.html') {
+    let cartPage = new CartPage();
     cartPage.loadProducts().then((products) => {
         console.log(products);
     });
+} else {
+    MenuPage.loadPizzas();
+    MenuPage.loadBeverages();
 }

@@ -11,7 +11,8 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index(Request $request)
     {
@@ -50,12 +51,27 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $product = Product::where('id', $id)->first();
+
+        if ($product === null) {
+            return response()->json([
+                    'message' => 'Not Found',
+                ], 404)
+                ->header('Content-Type', 'application/json; charset=UTF-8')
+                ->header('Cache-Control', 'no-store, no-cache, must-revalidate')
+                ->header('Pragma', 'no-cache');
+        }
+
+        return response()
+            ->json($product)
+            ->header('Content-Type', 'application/json; charset=UTF-8')
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate')
+            ->header('Pragma', 'no-cache');
     }
 
     /**
