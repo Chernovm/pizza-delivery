@@ -73,7 +73,7 @@ export default class CartPage {
         let productsArr = await this.storage.loadCart();
 
         let name = document.querySelector('input[name="full_name"]');
-        let address = document.querySelector('textarea[name="address"]');
+        let address = document.querySelector('input[name="address"]');
         let phone = document.querySelector('input[name="phone"]');
 
         let deliveryPriceUsd = document.querySelector('#delivery-cost > .usd');
@@ -82,7 +82,7 @@ export default class CartPage {
 
         let payload = {};
 
-        if (!!!name) {
+        if (!!!name.value || (!!name.value && name.value.length === 0)) {
             console.log('name is empty');
             name.classList.add('uk-form-danger');
             return;
@@ -91,7 +91,7 @@ export default class CartPage {
             payload['name'] = name.value;
         }
 
-        if (!!!address) {
+        if (!!!address.value || (!!address.value && address.value.length === 0)) {
             console.log('address is empty');
             address.classList.add('uk-form-danger');
             return;
@@ -100,7 +100,7 @@ export default class CartPage {
             payload['address'] = address.value.trim();
         }
 
-        if (!!!phone) {
+        if (!!!phone.value || (!!phone.value && phone.value.length === 0)) {
             console.log('phone is empty');
             phone.classList.add('uk-form-danger');
             return;
