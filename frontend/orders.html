@@ -21,7 +21,7 @@
             <div class="uk-navbar-left uk-background-primary uk-light">
                 <ul class="uk-navbar-nav uk-margin-small-left">
                     <li class="uk-visible@m">
-                        <a href="/#pizza-heading" uk-scroll="offset: 150;">Pizza</a>
+                        <a href="/#pizza-heading">Pizza</a>
                     </li>
                     <li class="uk-visible@m">
                         <a href="/#beverages-heading" uk-scroll>Beverages</a>
@@ -35,8 +35,8 @@
                         <a href="/orders.html" uk-icon="icon: tag" title="Orders">
                         </a>
                     </li>
-                    <li>
-                        <a href="/cart.html" uk-icon="icon: cart" title="Cart">
+                    <li title="Cart">
+                        <a href="#" uk-icon="icon: cart">
                             <span id="cart-counter" class="uk-badge">0</span>
                         </a>
                     </li>
@@ -54,23 +54,18 @@
 
 <div class="uk-container uk-margin-medium uk-padding-large" uk-height-viewport="expand: true">
 
-    <h1 id="pizza-heading" class="uk-heading-small uk-text-center">Pizza</h1>
+    <h1 id="cart-heading" class="uk-heading-small uk-text-center">Orders</h1>
 
-    <div id="pizza-list" class="uk-child-width-1-2@s uk-child-width-1-3@m uk-grid-large uk-flex-center uk-margin-medium-top" uk-grid  uk-height-match="target: > div > .uk-card > .uk-card-body">
-        <div class="uk-flex uk-flex-center">
+    <div id="orders-list" class="uk-flex-center uk-margin-large-top uk-animation-slide-top">
+        <div id="empty-message" class="uk-flex uk-flex-center uk-animation-fade uk-hidden">
+            <h4>No orders</h4>
+        </div>
+        <div id="loading-spinner" class="uk-flex uk-flex-center uk-margin-large-bottom">
             <div uk-spinner="ratio: 3"></div>
         </div>
+
     </div>
 
-    <hr class="uk-divider-icon uk-margin-large-top">
-
-    <h1 id="beverages-heading" class="uk-heading-small uk-text-center">Beverages</h1>
-
-    <div id="beverage-list" class="uk-child-width-1-2@s uk-child-width-1-3@m uk-grid-large uk-flex-center uk-margin-large-top" uk-grid  uk-height-match="target: > div > .uk-card > .uk-card-body">
-        <div class="uk-flex uk-flex-center">
-            <div uk-spinner="ratio: 3"></div>
-        </div>
-    </div>
 </div>
 
 <div class="uk-container uk-container-expand footer">&nbsp;</div>
@@ -84,12 +79,12 @@
 
         <ul class="uk-nav uk-nav-default">
             <li class="uk-margin-large-top">
-                <a href="#pizza-heading" uk-scroll="offset: 150;">
+                <a href="/#pizza-heading">
                     <h2 class="uk-h3 uk-heading-bullet">Pizza</h2>
                 </a>
             </li>
             <li class="uk-margin-large-medium">
-                <a href="#beverages-heading" uk-scroll="offset: 150;">
+                <a href="/#beverages-heading">
                     <h2 class="uk-h3 uk-heading-bullet">Beverages</h2>
                 </a>
             </li>
@@ -98,10 +93,7 @@
     </div>
 </div>
 
-<a href="#" class="fixed-right-bottom" title="To top" uk-totop></a>
-
 
 <script src="dist/bundle.js"></script>
 </body>
 </html>
-
