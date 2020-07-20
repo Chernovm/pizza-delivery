@@ -48,7 +48,6 @@ export default class CartStorage {
     }
 
     async addToCart(productId) {
-        let cartStorage = this;
         try {
             let productsArr = await this.loadCart();
 
@@ -77,17 +76,38 @@ export default class CartStorage {
 
             productsArr[i] = product;
 
-            localforage.setItem(cartKey, productsArr).then(function () {
-                return localforage.getItem(cartKey);
-            }).then(function (value) {
-                console.log("value verified: ", value);
-                const productsCount = cartStorage.calculateProducts(value);
-                cartStorage.view.updateProductsCount(productsCount);
-                // we got our value
-            }).catch(function (err) {
-                // we got an error
-                console.log(err);
-            });
+            this.writeToStorage(cartKey, productsArr)
+        } catch (err) {
+            // This code runs if there were any errors.
+            console.log(err);
+        }
+    }
+
+    async removeFromCart(context, productId) {
+        try {
+            let productsArr = await this.loadCart();
+
+            if (productsArr === null || !!!productsArr.length) {
+                productsArr = [];
+            }
+
+
+            if (productsArr.length > 0) {
+                for (let i = 0; i < productsArr.length; i++) {
+                    if (productsArr[i]['productId'] === productId) {
+                        productsArr.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+
+            let callback = () => {
+                // context.remove();
+                // let productId = context.attributes['product-id'].value;
+                context.remove();
+            };
+
+            this.writeToStorage(cartKey, productsArr, callback);
         } catch (err) {
             // This code runs if there were any errors.
             console.log(err);
@@ -103,6 +123,23 @@ export default class CartStorage {
         }
 
         return productsCount;
+    }
+
+    writeToStorage(cartKey, productsArr, callback) {
+        let cartStorage = this;
+        localforage.setItem(cartKey, productsArr).then(function () {
+            return localforage.getItem(cartKey);
+        }).then(function (value) {
+            console.log("value verified: ", value);
+            const productsCount = cartStorage.calculateProducts(value);
+            cartStorage.view.updateProductsCount(productsCount);
+            // we got our value
+            if (typeof callback === 'function')
+                callback();
+        }).catch(function (err) {
+            // we got an error
+            console.log(err);
+        });
     }
 
     clearStorage() {

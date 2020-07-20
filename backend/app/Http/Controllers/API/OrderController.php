@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
-use Illuminate\Http\Request;
+use App\Order;
 
-class ProductController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,22 +17,10 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $productType = $request->get('type') ?? null;
-        $productsQuery = Product::with('productType')->orderBy('title');
-
-        if ($productType !== null) {
-            $productsQuery->where('product_type_id', function($q) use ($productType)
-            {
-                $q->from('product_types')
-                    ->selectRaw('id')
-                    ->where('title', $productType);
-            });
-        }
-
-        $products = $productsQuery->get();
+        $orders = Order::with('positions')->with('positions.product')->orderBy('created_at', 'DESC')->get();
 
         return response()
-            ->json($products)
+            ->json($orders)
             ->header('Content-Type', 'application/json; charset=UTF-8')
             ->header('Cache-Control', 'no-store, no-cache, must-revalidate')
             ->header('Pragma', 'no-cache');
@@ -41,10 +30,33 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
+        $this->validate(
+            $request,
+            [
+                'name' => 'required|min:4',
+                'address' => 'required',
+                'phone' => 'required|max:16',
+                'products' => 'required',
+                'delivery' => 'required'
+            ]
+        );
+
+        $orderId = Order::createOrder($request->all());
+
+        if ($orderId !== false) {
+            return response()
+                ->json([], 201)
+                ->header('Content-Type', 'application/json; charset=UTF-8')
+                ->header('Location', "/orders/$orderId");
+        }
+
+        return response()
+            ->header('Content-Type', 'application/json; charset=UTF-8')
+            ->json([], 400);
     }
 
     /**
@@ -55,22 +67,6 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::where('id', $id)->first();
-
-        if ($product === null) {
-            return response()->json([
-                    'message' => 'Not Found',
-                ], 404)
-                ->header('Content-Type', 'application/json; charset=UTF-8')
-                ->header('Cache-Control', 'no-store, no-cache, must-revalidate')
-                ->header('Pragma', 'no-cache');
-        }
-
-        return response()
-            ->json($product)
-            ->header('Content-Type', 'application/json; charset=UTF-8')
-            ->header('Cache-Control', 'no-store, no-cache, must-revalidate')
-            ->header('Pragma', 'no-cache');
     }
 
     /**
