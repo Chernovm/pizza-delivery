@@ -1,6 +1,6 @@
-export default class OrderItem {
-    constructor(orderData) {
-        this.data = orderData;
+export default class OrdersList {
+    constructor(ordersData) {
+        this.data = ordersData;
         this.html = '';
         this.createMarkup()
     }
@@ -19,8 +19,12 @@ export default class OrderItem {
             cardDiv.appendChild(dt);
 
             let dd = document.createElement("dd");
-            dd.innerHTML = `$${order.sum_usd} (€${order.sum_eur}) POSITIONS:`;
+            dd.innerHTML = `$${order.sum_usd} (€${order.sum_eur}) // includes $${order.delivery_price_usd} (€${order.delivery_price_eur} for delivery)`;
             cardDiv.appendChild(dd);
+
+            let posDD = document.createElement("dd");
+            posDD.innerHTML = `Order list:`;
+            cardDiv.appendChild(posDD);
 
             let ul = document.createElement("ul");
 

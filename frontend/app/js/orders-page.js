@@ -1,6 +1,5 @@
 import axios from "axios";
-import UIkit from "uikit";
-import OrderItem from "./order-item";
+import OrdersList from "./orders-list";
 
 import errorHandler from "../error-handler";
 
@@ -24,10 +23,15 @@ export default class OrdersPage {
         })
             .then(function (response) {
                 console.log(response.data);
-                let item = new OrderItem(response.data);
+                let item = new OrdersList(response.data);
 
-                if (!!context.productsContainer && !!document.getElementById("loading-spinner"))
-                    context.productsContainer.innerHTML = '';
+                let spinner = document.getElementById("loading-spinner");
+                if (!!context.productsContainer && !!spinner)
+                    spinner.classList.add('uk-hidden');
+
+                if (!!!response.data.length && !!document.getElementById("empty-message")) {
+                    document.getElementById("empty-message").classList.remove('uk-hidden');
+                }
 
                 context.productsContainer.appendChild(item.getHtml());
             })
