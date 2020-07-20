@@ -109,13 +109,13 @@ export default class CartItem {
 
         let usdSpan = document.createElement("span");
         usdSpan.classList.add("usd", "product-price");
-        usdSpan.innerText = this.data.price_usd;
+        usdSpan.innerText = (+this.data.price_usd * (+this.product.count)).toFixed(2);
         price.append("$");
         price.appendChild(usdSpan);
 
         let eurSpan = document.createElement("span");
         eurSpan.classList.add("eur", "product-price");
-        eurSpan.innerText = this.data.price_eur;
+        eurSpan.innerText = (+this.data.price_eur * (+this.product.count)).toFixed(2);
         price.append(" (€");
         price.appendChild(eurSpan);
         price.append(")");
